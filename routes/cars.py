@@ -25,7 +25,8 @@ async def create_new_car(name:str=Form(...),make:str=Form(...),
     #           image=image,
     #           bodytype=bodytype,price=price)
     print(image['secure_url'])
-    my_car=Car(name=name,make=make,image=image['secure_url'],bodytype=bodytype,price=price)
+    my_car=Car(name=name,make=make,image=image['secure_url']
+               ,bodytype=bodytype,price=price)
     
     db.add(my_car)
     db.commit()
