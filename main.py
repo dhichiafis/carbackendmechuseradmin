@@ -4,6 +4,7 @@ from database import Base,engine
 from routes.users import user_router
 from routes.cars import cars_router
 from routes.specifications import specs_router
+from routes.profile import profile_router
 Base.metadata.create_all(bind=engine)
 
 app=FastAPI()
@@ -11,6 +12,7 @@ app=FastAPI()
 app.include_router(user_router)
 app.include_router(cars_router)
 app.include_router(specs_router)
+app.include_router(profile_router)
 
 @app.get('/')
 async def home(): 
