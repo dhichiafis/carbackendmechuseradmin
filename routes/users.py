@@ -45,3 +45,7 @@ async def create_login_access_token(
 @user_router.get('/all/users')
 async def get_all_users(db:Session=Depends(connect)):
     return db.query(User).all()
+
+@user_router.get('/users/me')
+async def read_users_me(current:User=Depends(get_current_active_user)):
+    return current 
