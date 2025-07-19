@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 
 
 profile_router=APIRouter(tags=['profiles'],prefix='/profile')
-@profile_router.post('/new/')
+@profile_router.post('/new/',response_model=ProfileBase)
 async def create_new_profile(
     profile:ProfileCreat,
     user:User=Depends(get_current_active_user) ,
@@ -21,5 +21,11 @@ async def create_new_profile(
     db.add(profile)
     db.commit()
     db.refresh(profile)
-    return ProfileBase
+    return profile
+
+
+@profile_router.get('/all')
+async def get_all_profiles(db:Session=Depends(connect),user:User=Depends(Role_Checker(['admin']))):
+    return db.query(Profile).all()
+
 
